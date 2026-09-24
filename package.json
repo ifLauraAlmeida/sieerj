@@ -1,0 +1,16 @@
+{
+  "name": "sieerj",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "SIEERJ — site estático; este package.json existe apenas para os testes com node --test.",
+  "author": "Laura Almeida (https://github.com/ifLauraAlmeida)",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ifLauraAlmeida/sieerj.git"
+  },
+  "scripts": {
+    "test": "node --test \"tests/site/*.test.js\""
+  }
+}
