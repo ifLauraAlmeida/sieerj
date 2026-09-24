@@ -1,0 +1,58 @@
+<!doctype html>
+<!-- SIEERJ — © 2026 Laura Almeida. Todos os direitos reservados; veja LICENSE.md. -->
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Laura Almeida">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SIEERJ — Escolas do Rio de Janeiro</title>
+  <meta name="description" content="Panorama e busca dos estabelecimentos de educação básica do Estado do Rio de Janeiro, a partir do Censo Escolar/INEP.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="css/estilo.css">
+  <script src="js/tema-inicial.js"></script>
+</head>
+<body>
+  <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
+  <header id="cabecalho" class="cabecalho"></header>
+
+  <main id="conteudo" class="container">
+    <section class="destaque" aria-labelledby="titulo-busca">
+      <h1 id="titulo-busca">Escolas do Estado do Rio de Janeiro</h1>
+      <p class="subtitulo">Consulte dados públicos do Censo Escolar sobre as escolas de educação básica dos 92 municípios fluminenses.</p>
+      <form class="busca-rapida" action="escolas.html" method="get" role="search">
+        <label class="sr-only" for="busca-texto">Nome da escola ou código INEP</label>
+        <input id="busca-texto" type="search" name="texto" placeholder="Nome da escola ou código INEP" autocomplete="off">
+        <button class="botao" type="submit">Buscar</button>
+      </form>
+    </section>
+
+    <h2 id="panorama-titulo">Panorama estadual</h2>
+    <div id="seletor-ano"></div>
+    <div id="panorama" aria-labelledby="panorama-titulo">
+      <p class="carregando">Carregando dados…</p>
+    </div>
+
+    <h2 id="evolucao">Evolução estadual</h2>
+    <div id="evolucao-estado"><p class="carregando">Carregando séries históricas…</p></div>
+
+    <h2 id="municipios">Municípios</h2>
+    <p class="subtitulo">Clique no nome para ver o panorama do município e nos títulos das colunas para ordenar.</p>
+    <div id="tabela-municipios"></div>
+
+    <h2 id="sobre">Sobre os dados</h2>
+    <div class="sobre">
+      <p><strong>Fonte:</strong> <a href="https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/censo-escolar">Microdados do Censo Escolar da Educação Básica — INEP</a>, de 2007 em diante, recortados para o Estado do Rio de Janeiro (SG_UF = RJ). O INEP republicou os anos antigos num formato harmonizado; variáveis que não existiam em um ano aparecem como lacuna, não como zero.</p>
+      <p><strong>Ficha da escola:</strong> mostra o último Censo em que a escola aparece. Escolas extintas continuam consultáveis.</p>
+      <p><strong>Escolas em atividade</strong> são as com situação de funcionamento "Em atividade". A composição da rede e os percentuais de infraestrutura consideram apenas essas escolas.</p>
+      <p><strong>Docentes e gestores</strong> são contados por escola: quem atua em mais de uma escola é contado em cada uma delas.</p>
+      <p><strong>Rótulos</strong> das variáveis e categorias vêm do dicionário de dados oficial do INEP que acompanha os microdados.</p>
+      <p>Os microdados já são anonimizados pelo INEP. O SIEERJ mostra apenas dados de estabelecimentos e agregados.</p>
+    </div>
+  </main>
+
+  <footer id="rodape" class="rodape"></footer>
+  <script type="module" src="js/pagina-inicio.js"></script>
+</body>
+</html>
