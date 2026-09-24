@@ -165,7 +165,7 @@ venv.bak/
 .ropeproject
 
 # mkdocs documentation
-/site
+# /site  (desativado: site/ é o código-fonte do site do SIEERJ, não saída do mkdocs)
 
 # mypy
 .mypy_cache/
@@ -216,3 +216,30 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+
+# ---------------------------------------------------------------------------
+# SIEERJ
+# ---------------------------------------------------------------------------
+
+# Arquivos de trabalho locais da autora (convenções internas)
+COMMITCONVENTIONALS.md
+AGENTS.md
+
+# Camadas do pipeline: brutos (.zip do INEP, ~1 GB), extraídos (~4 GB) e prata
+dados/
+
+# Camada ouro gerada por "make dados" (~150 MB); regenerável a qualquer momento
+site/dados/
+
+# Pacotes de publicação gerados por "make pacote"
+dist/
+
+# Cópia manual antiga dos microdados (substituída por dados/brutos)
+data/
+
+# Editores e sistema operacional
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
