@@ -1,0 +1,58 @@
+# SIEERJ — © 2026 Laura Almeida. Todos os direitos reservados; veja LICENSE.md.
+# Publica o site no GitHub Pages.
+# Os JSON (~110 MB, 13 mil arquivos) não ficam no git: vêm do arquivo sieerj-dados.zip
+# anexado ao release "dados-2025" (gerado localmente com `make pacote`).
+name: Publicar site
+
+# Execução manual (aba Actions → "Publicar site" → Run workflow): o release com os dados
+# precisa existir antes; disparar a cada push falharia enquanto ele não for criado.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+env:
+  TAG_DADOS: dados-2025
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      # node --test com glob exige Node 21+.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Testes
+        run: |
+          python3 -m unittest discover -s tests/pipeline -t .
+          node --test "tests/site/*.test.js"
+
+      - name: Baixar dados do release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release download "$TAG_DADOS" --pattern sieerj-dados.zip --dir /tmp
+          unzip -q /tmp/sieerj-dados.zip -d site
+          test -f site/dados/indice.json
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - id: deploy
+        uses: actions/deploy-pages@v4
