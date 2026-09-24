@@ -1,7 +1,7 @@
 // SIEERJ — © 2026 Laura Almeida. Todos os direitos reservados; veja LICENSE.md.
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { alinharAnos, colunaDaSerie, dividirSeries, opcoesDeMetrica, valoresDaMetrica, variacao } from "../../site/js/serie.js";
+import { alinharAnos, colunaDaSerie, dividirSeries, minusculaInicial, opcoesDeMetrica, valoresDaMetrica, variacao } from "../../site/js/serie.js";
 
 const metricas = ["ESCOLAS_ATIVAS", "QT_MAT_BAS", "QT_TUR_BAS"];
 const linhas = [[10, 300, 10], null, [12, 360, 0]];
@@ -28,3 +28,7 @@ test("variacao entre primeiro e último valor", () => {
   assert.equal(variacao([0, 3]).percentual, null);
 });
 test("alinharAnos preenche anos ausentes", () => assert.deepEqual(alinharAnos([2019, 2025], ["a", "b"], [2019, 2020, 2025]), ["a", null, "b"]));
+test("minusculaInicial preserva siglas (regressão: aparecia \"(pne)\")", () => {
+  assert.equal(minusculaInicial("Banheiro acessível (PNE)"), "banheiro acessível (PNE)");
+  assert.equal(minusculaInicial(""), "");
+});

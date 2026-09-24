@@ -63,9 +63,19 @@ export function valoresDaMetrica(linhas, metricas, id) {
  */
 export function opcoesDeMetrica(metricas, incluirEscolasAtivas) {
   const razoes = Object.entries(RAZOES).map(([id, razao]) => ({ id, rotulo: razao.rotulo, tipo: "razao" }));
-  const publicadas = metricas.map(({ id, rotulo, tipo }) => ({ id, rotulo: tipo === "infraestrutura" ? `% com ${rotulo.toLowerCase()}` : rotulo, tipo }));
+  const publicadas = metricas.map(({ id, rotulo, tipo }) => ({ id, rotulo: tipo === "infraestrutura" ? `% com ${minusculaInicial(rotulo)}` : rotulo, tipo }));
   const ativas = incluirEscolasAtivas ? [{ id: METRICA_ESCOLAS_ATIVAS, rotulo: "Escolas em atividade", tipo: "quantidade" }] : [];
   return [...ativas, ...publicadas.slice(0, 4), ...razoes, ...publicadas.slice(4)];
+}
+
+/**
+ * Deixa só a primeira letra minúscula, preservando siglas ("Banheiro acessível (PNE)" → "banheiro acessível (PNE)").
+ * @example minusculaInicial("Banheiro acessível (PNE)") // "banheiro acessível (PNE)"
+ * @param {string} texto
+ * @returns {string}
+ */
+export function minusculaInicial(texto) {
+  return texto.charAt(0).toLowerCase() + texto.slice(1);
 }
 
 /**
